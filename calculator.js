@@ -5,22 +5,22 @@ const state = {
 };
 
 const actions = {
+    evaluate: () => this.setState({ display: eval(this.state.display) }),
+    clearDisplay: () => this.setState({ display: '0' }),
     addSymbol: symbol => this.setState({ display: this.state.display + symbol }),
     addNumber: number => {
         if (this.state.display === '0') {
             this.setState({ display: number });
         } else {
-            actions.addSymbol(number);
+            this.actions.addSymbol(number);
         }
     },
-    evaluate: () => this.setState({ display: eval(this.state.display) }),
-    clearDisplay: () => this.setState({ display: '0' }),
     backspace: () => {
         let length = this.state.display.length;
         if (length > 1) {
             this.setState({ display: this.state.display.substring(0, length - 1) });
         } else {
-            actions.clearDisplay();
+            this.actions.clearDisplay();
         }
     }
 };
@@ -39,28 +39,28 @@ const view = [
             id: 'display',
             render: () => this.state.display
         }),
+        button({
+            id: 'equals',
+            onclick: () => this.parent.actions.evaluate()
+        }, '='),
+        button({
+            id: 'clear',
+            onclick: () => this.parent.actions.clearDisplay()
+        }, 'C'),
+        button({
+            id: 'backspace',
+            onclick: () => this.parent.actions.backspace()
+        }, '\u232b'),
         ...range(0, 10, index => button({
             state: { number: index.toString() },
             id: 'number' + index,
-            onclick: () => actions.addNumber(this.state.number)
+            onclick: () => this.parent.actions.addNumber(this.state.number)
         }, index)),
         ...each(operators, item => button({
             state: { symbol: item.symbol },
             id: item.id,
-            onclick: () => actions.addSymbol(this.state.symbol)
-        }, item.symbol)),
-        button({
-            id: 'equals',
-            onclick: () => actions.evaluate()
-        }, '='),
-        button({
-            id: 'backspace',
-            onclick: () => actions.backspace()
-        }, '\u232b'),
-        button({
-            id: 'clear',
-            onclick: () => actions.clearDisplay()
-        }, 'C'),
+            onclick: () => this.parent.actions.addSymbol(this.state.symbol)
+        }, item.symbol))
     ])
 ];
 
