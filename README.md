@@ -26,7 +26,7 @@ const { renderElement, app, range, each, div, button, span } = ElTag;
 
 ## Create the Application Skeleton
 
-An ElTag app has actions, state, and a view.
+An ElTag app has state, actions, and a view.
 
 Create the state object. The `display` variable will contain the calculator's expression or solution.
 
