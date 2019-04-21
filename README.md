@@ -12,7 +12,7 @@ To get started, create a file named `calculator.js` and download this project's 
 
 ## Install the Library
 
-ElTag is available through the jsDelivr CDN or as a [direct download](https://github.com/TSedlar/eltag/blob/master/eltag.js). Use the @latest tag to always request the newest code release.
+ElTag is available through the jsDelivr CDN or as a [direct download](https://github.com/TSedlar/eltag/blob/master/eltag.js). Use the @latest tag to request the newest release.
 
 ```html
 <script src='https://cdn.jsdelivr.net/gh/TSedlar/eltag@latest/eltag.min.js'>
