@@ -28,7 +28,7 @@ const { renderElement, app, range, each, div, button, span } = ElTag;
 
 An ElTag app has actions, state, and a view.
 
-Create the state object. The `display` variable will be used to display the current expression or solution.
+Create the state object. The `display` variable will contain the calculator's expression or solution.
 
 ```javascript
 const state = {
@@ -44,7 +44,7 @@ const actions = {
 };
 ```
 
-Create the view array. This array will contain the document tree to be generated when rendering the application.
+Create the view array. This array will contain the element tree to be generated when rendering the application.
 
 ```javascript
 const view = [
@@ -52,18 +52,18 @@ const view = [
 ];
 ```
 
-You can now initialize an empty but functional ElTag application.
+You now have everything you need to initialize a functional but empty ElTag application.
 
 ```javascript
 const calculator = app({ state: state, actions: actions }, view);
 renderElement(document.body, calculator);
 ```
 
-The `app` function takes a properties object containing the app's state, actions, and any other information as needed. The `renderElement` function renders an ElTag app into the given element, here `document.body`.
+The `app` function takes a properties object containing the app's state, actions, and any other information to make available to the app as needed. The `renderElement` function renders an ElTag app into the given element, `document.body`.
 
 ## Create the View
 
-ElTag offers each HTML tag as a function that takes a dictionary of attributes and optionally either an inner text string or an array of subcomponents.
+ElTag offers a function for each HTML tag, such as `div` or `button`. These functions have two optional parameters: an attributes object and an inner content variable, which can be either a string or an array of subcomponents.
 
 Create the main div that will hold the calculator's display and button components. The linked stylesheet knows this div as `#calculator` and organizes its components according to a grid layout.
 
@@ -75,7 +75,7 @@ const view = [
 ];
 ```
 
-The calculator's single state variable is its display, which will be used to build expressions and calculate solutions. Create a span within the main div and give it an id, `"display"`, and a `render` attribute pointing to a function that returns the display state variable.
+The calculator's single state variable is its display, showing the current expression or solution. Create a span within the main div and give it an id, `"display"`, and a `render` attribute pointing to a function that returns the display state variable.
 
 ```javascript
 const view = [
@@ -88,13 +88,13 @@ const view = [
 ];
 ```
 
-The `render` attribute is a special ElTag attribute that is called when rendering an element. The result of calling `render` is placed within the element's tags, allowing you to create dynamic elements that reflect the application state.
+The `render` attribute is a special ElTag attribute that is called when rendering an element. The result of the `render` call is placed within the element's tags, allowing you to create dynamic elements that reflect the application state.
 
 ## Define the Application's Actions
 
 Next, define the calculator's actions. These actions will be available to the view components' event handlers like `onclick`.
 
-In most applications, the result of an action should be reflected in the view to show users that something happened when they give input to the application. You can initiate a re-render of the view using the `this.setState` function, which takes a new state object that is combined with the existing app or component state. The `this` keyword here refers to the ElTag application.
+Your application should typically give users visual feedback when they perform an action. You can initiate a re-render of the view using the `this.setState` function, which takes a state object and combines it with the existing app state. The `this` keyword here refers to the ElTag application.
 
 Add an `evaluate` action that replaces the display's expression with the evaluation of that expression.
 
@@ -135,7 +135,7 @@ const actions = {
 
 The application now knows what actions are available to it, so you can create the remaining view components that perform actions when clicked.
 
-Create and add an equals button that evaluates the calculator's expression. Remember that the first argument to a tag function is the element's attributes, and the second argument is the element contents or inner text, `"="`.
+Create and add an equals button that evaluates the calculator's expression. The first argument to a tag function is the element's attributes, and the second argument is the element contents or inner text, `"="`.
 
 ```javascript
 const view = [
@@ -152,9 +152,9 @@ const view = [
 ];
 ```
 
-You can use `this.parent` to access the app's actions and states from within an element. In this context, `this` refers to the current element and can be used to access this element's HTML attributes or state, if defined. This state is independent of the parent app state.
+You can use `this.parent` to access the app's actions and states from within an element. In this context, `this` refers to the current element and can be used to access this element's HTML attributes or state, if defined. Each component state is independent of the parent app state.
 
-Add a button that clears the display and a button that clears the last character of the display.
+Add buttons that clear and backspace the display.
 
 ```javascript
 const view = [
@@ -179,7 +179,7 @@ const view = [
 ];
 ```
 
-Add the number buttons to the calculator. Rather than write out each number button, you can use ElTag's `range` function, which takes an inclusive start, exclusive end, and callback function for what to do with each index. Create the buttons using the callback function, and use the spread operator `...` to expand the result of `range` into the main div's component array.
+Add the number buttons to the calculator. Rather than write out each number button, you can use ElTag's `range` function, which takes an inclusive start, exclusive end, and callback function for what to do with each index. Create the buttons in the callback function, and use the spread operator `...` to expand the result of `range` into the main div's component array.
 
 ```javascript
 const view = [
@@ -209,9 +209,9 @@ const view = [
 ];
 ```
 
-Notice that the `index` cannot be directly used in the buttons' `onclick` attributes. You must instead place the `index` or any other parameter of this scope into the component's local state object and access it via `this.state`. This step is a consequence of the app using a different calling context when later invoking the `onclick` function.
+Notice that the `index` cannot be directly used in the buttons' `onclick` attributes. You must instead place the `index` into the component's local state object and access it through `this.state`. This step is required for local variables because the app uses a different calling context when later invoking the `onclick` function.
 
-The only buttons remaining to add are the decimal point and the operators. These buttons will each call the `addSymbol` action, so you can create them using another convenient ElTag function, `each`. This function works like `Array.map` and takes an array and a callback function to perform for each element in the array.
+The only buttons still missing are the decimal point and the operators. These buttons will each call the `addSymbol` action, so you can create them using another convenient ElTag function, `each`. This function works like `Array.map` and takes an array and a callback function to perform for each element in the array.
 
 Create the symbol button array containing each button's symbol and CSS id.
 
@@ -260,11 +260,13 @@ const view = [
 ];
 ```
 
-The calculator is complete! Test the calculator if you have not yet done so and check that everything works as expected.
+Congratulations! You have completed the ElTag calculator app. Test the calculator if you have not yet done so and check that everything works as expected.
 
 You can view the working calculator online [here](https://codepen.io/finnthompson/pen/wZmKYb).
 
-View the ElTag project repository and other examples [here](https://github.com/TSedlar/eltag). Other functionalities not mentioned in this guide:
+ElTag offers some functions not mentioned in this guide:
  * The `oninit` element attribute, called on element initialization.
  * The `onrender` element attribute, called on element render.
- * The `every` attribute, used to call a function at regular intervals.
+ * The `every` element attribute, used to call a function at regular intervals.
+
+ View the ElTag project repository and other examples [here](https://github.com/TSedlar/eltag).
