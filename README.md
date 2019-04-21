@@ -6,9 +6,9 @@ In this tutorial, you will create a simple calculator app using ElTag.
 
 ![ElTag Calculator App](calculator.png)
 
-To get started, create a file named `calculator.js` and download this project's HTML and CSS files.
- * [index.html](index.html)
- * [calculator.css](calculator.css)
+To get started, create a file named `calculator.js` and download this project's HTML and CSS files:
+* [index.html](index.html)
+* [calculator.css](calculator.css)
 
 ## Install the Library
 
@@ -135,7 +135,11 @@ const actions = {
 
 The application now knows what actions are available to it, so you can create the remaining view components that perform actions when clicked.
 
-Create and add an equals button that evaluates the calculator's expression. The first argument to a tag function is the element's attributes, and the second argument is the element contents or inner text, `"="`.
+Create and add an equals button that evaluates the calculator's expression. The first argument to a tag function is the element's attributes, and the second argument is the element contents or inner text, `"="`. Element attributes include HTML attributes and ElTag attributes:
+* All HTML attributes, such as `id` and `class`.
+* The style attribute, in the form of an object like `style: { color: 'red' }`.
+* All HTML events, such as `onclick`.
+* ElTag attributes, such as `render`.
 
 ```javascript
 const view = [
@@ -265,8 +269,9 @@ Congratulations! You have completed the ElTag calculator app. Test the calculato
 You can view the working calculator online [here](https://codepen.io/finnthompson/pen/wZmKYb).
 
 ElTag offers some functions not mentioned in this guide:
- * The `oninit` element attribute, called on element initialization.
- * The `onrender` element attribute, called on element render.
- * The `every` element attribute, used to call a function at regular intervals.
+* The `condition` element attribute, called before rendering an element. The element will be rendered if the `condition` resolves to `true`.
+* The `oninit` element attribute, called when initializing an element.
+* The `onrender` element attribute, called when rendering an element.
+* The `every` element attribute, used to call a function at regular intervals.
 
- View the ElTag project repository and other examples [here](https://github.com/TSedlar/eltag).
+View the ElTag project repository and other examples [here](https://github.com/TSedlar/eltag).
