@@ -59,11 +59,11 @@ const calculator = app({ state: state, actions: actions }, view);
 renderElement(document.body, calculator);
 ```
 
-The `app` function takes a properties object containing the app's state, actions, and any other information to make available to the app as needed. The `renderElement` function renders an ElTag app into the given element, `document.body`.
+The `app` function takes a properties object containing the app's state, actions, and any other information you need the app to have access to. The `renderElement` function renders an ElTag app into the given element, `document.body`.
 
 ## Create the View
 
-ElTag offers a function for each HTML tag, such as `div` or `button`. These functions have two optional parameters: an attributes object and an inner content variable, which can be either a string or an array of subcomponents.
+ElTag offers a function for each HTML tag, such as `div` or `button`. These tag functions have two optional parameters: an attributes object and an inner content variable, which can be either a string or an array of subcomponents.
 
 Create the main div that will hold the calculator's display and button components. The linked stylesheet knows this div as `#calculator` and organizes its components according to a grid layout.
 
@@ -88,7 +88,7 @@ const view = [
 ];
 ```
 
-The `render` attribute is a special ElTag attribute that is called when rendering an element. The result of the `render` call is placed within the element's tags, allowing you to create dynamic elements that reflect the application state.
+The `render` attribute is a special ElTag attribute that is called when rendering an element. The result of the `render` call is placed in the element, allowing you to create dynamic elements that reflect the application state.
 
 ## Define the Application's Actions
 
@@ -152,7 +152,7 @@ const view = [
 ];
 ```
 
-You can use `this.parent` to access the app's actions and states from within an element. In this context, `this` refers to the current element and can be used to access this element's HTML attributes or state, if defined. Each component state is independent of the parent app state.
+You can use `this.parent` to access the app's actions and states from within an element. In this context, `this` refers to the current element and can be used to access this element's HTML attributes or state, if defined. Each component's state is independent of the parent app state.
 
 Add buttons that clear and backspace the display.
 
@@ -211,7 +211,7 @@ const view = [
 
 Notice that the `index` cannot be directly used in the buttons' `onclick` attributes. You must instead place the `index` into the component's local state object and access it through `this.state`. This step is required for local variables because the app uses a different calling context when later invoking the `onclick` function.
 
-The only buttons still missing are the decimal point and the operators. These buttons will each call the `addSymbol` action, so you can create them using another convenient ElTag function, `each`. This function works like `Array.map` and takes an array and a callback function to perform for each element in the array.
+The final buttons are the decimal point and operator buttons. These buttons will each call the `addSymbol` action, so you can create them using another convenient ElTag function, `each`. This function works like `Array.map` and takes an array and a callback function to perform on each element in the array.
 
 Create the symbol button array containing each button's symbol and CSS id.
 
