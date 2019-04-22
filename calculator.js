@@ -64,5 +64,5 @@ const view = [
     ])
 ];
 
-const calculator = app({ state: state, actions: actions }, view);
+const calculator = app({ state, actions }, view);
 renderElement(document.body, calculator);

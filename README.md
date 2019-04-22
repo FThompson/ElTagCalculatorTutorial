@@ -55,7 +55,7 @@ const view = [
 You now have everything you need to initialize a functional but empty ElTag application.
 
 ```javascript
-const calculator = app({ state: state, actions: actions }, view);
+const calculator = app({ state, actions }, view);
 renderElement(document.body, calculator);
 ```
 
