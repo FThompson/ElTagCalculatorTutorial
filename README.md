@@ -1,14 +1,14 @@
 # ElTag Getting Started Tutorial
 
-ElTag is an HTML tag component framework that generates responsive HTML from state, action, and view JavaScript components.
+ElTag is an HTML tag component framework that generates responsive HTML from state, action, and view components in JavaScript.
 
 In this tutorial, you will create a simple calculator app using ElTag.
 
 ![ElTag Calculator App](calculator.png)
 
 To get started, create a file named `calculator.js` and download this project's HTML and CSS files:
-* [index.html](index.html)
-* [calculator.css](calculator.css)
+* [index.html](https://github.com/FThompson/ElTagCalculatorTutorial/blob/master/index.html)
+* [calculator.css](https://github.com/FThompson/ElTagCalculatorTutorial/blob/master/calculator.css)
 
 ## Install the Library
 
