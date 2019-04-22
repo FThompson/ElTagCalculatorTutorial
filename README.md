@@ -63,7 +63,11 @@ The `app` function takes a properties object containing the app's state, actions
 
 ## Create the View
 
-ElTag offers a function for each HTML tag, such as `div` or `button`. These tag functions have two optional parameters: an attributes object and an inner content variable, which can be either a string or an array of subcomponents.
+ElTag offers a function for each HTML element tag, such as `div` or `button`. These tag functions have two optional parameters: an attributes object and an inner content variable, which can be either a string or an array of subcomponents. Element attributes can include any HTML attributes and ElTag attributes:
+* All HTML attributes, such as `id` and `class`.
+* The style attribute, in the form of an object like `style: { backgroundColor: 'red' }`.
+* All HTML events, such as `onclick`.
+* ElTag attributes, such as `render`.
 
 Create the main div that will hold the calculator's display and button components. The linked stylesheet knows this div as `#calculator` and organizes its components according to a grid layout.
 
@@ -135,11 +139,7 @@ const actions = {
 
 The application now knows what actions are available to it, so you can create the remaining view components that perform actions when clicked.
 
-Create and add an equals button that evaluates the calculator's expression. The first argument to a tag function is the element's attributes, and the second argument is the element contents or inner text, `"="`. Element attributes include HTML attributes and ElTag attributes:
-* All HTML attributes, such as `id` and `class`.
-* The style attribute, in the form of an object like `style: { color: 'red' }`.
-* All HTML events, such as `onclick`.
-* ElTag attributes, such as `render`.
+Create and add an equals button that evaluates the calculator's expression. The first argument to the tag function is the element's `id` and `onclick` function, and the second argument is the element's inner text, `"="`.
 
 ```javascript
 const view = [
